@@ -105,6 +105,8 @@
 
   (format "%s.%s" path org-excalidraw-thumbnail-extension))
 
+(defcustom kroki-exec "kroki"
+  "The path to Kroki executable.")
 
 (defun org-excalidraw-to-svg-thumbnail (file)
   "Export excalidraw FILE to svg thumbnail."
@@ -119,9 +121,10 @@
     ;; Convert
     (cond
      ;; With `kroki'
-     ((executable-find "kroki")
+     ((executable-find kroki-exec)
       (shell-command
-       (format "kroki convert \"%s\" --type excalidraw --format svg --out-file \"%s\""
+       (format "%s convert \"%s\" --type excalidraw --format svg --out-file \"%s\""
+               kroki-exec
                path
                svg-path)))
 
